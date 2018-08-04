@@ -31,7 +31,7 @@ public class ServiceAgent extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-//        startTimer();
+        startTimer();
 //      startForeground(43,new Notification());
         //
         Intent myIntent = new Intent(getApplicationContext(), MyReceiver.class);
@@ -46,14 +46,14 @@ public class ServiceAgent extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.i("EXIT", "ondestroy!");
-        stoptimertask();
-
-        Intent myIntent = new Intent(getApplicationContext(), Restarter.class);
-
-
-        getApplicationContext().startService(new Intent(getApplicationContext(), ServiceAgent.class));
-        Intent broadcastIntent = new Intent(getApplicationContext(),Restarter.class);
-        sendBroadcast(broadcastIntent);
+//        stoptimertask();
+//
+//        Intent myIntent = new Intent(getApplicationContext(), Restarter.class);
+//
+//
+//        getApplicationContext().startService(new Intent(getApplicationContext(), ServiceAgent.class));
+//        Intent broadcastIntent = new Intent(getApplicationContext(),Restarter.class);
+//        sendBroadcast(broadcastIntent);
 
     }
 
@@ -78,6 +78,8 @@ public class ServiceAgent extends Service {
         timerTask = new TimerTask() {
             public void run() {
                 Log.w("in timer", "in timer ++++  "+ (counter++));
+                stoptimertask();
+                stopSelf();
             }
         };
     }
